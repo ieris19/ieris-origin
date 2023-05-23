@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ieris19.config</groupId>
+    <artifactId>ieris-origin</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>Ieris Origin</name>
+    <description>
+        The origin parent for all the POM templates under this project
+
+        Multiple elements are defined in this parent:
+        Default configuration for plugins: It automatically configures all plugins to the latest version
+        (as of the last revision of this POM) and sets a default configuration for the plugins.
+
+        Most of the configuration is done through properties, so that it can be overridden in the child
+    </description>
+
+    <!-- The properties section is used to define properties to refer back to in other areas. Properties
+     are inherited but can also be modified at any level in order to change these anywhere they are used-->
+    <properties>
+        <!--
+        ieris.java.version is a property used to quickly refer to the Java version for the source and target.
+         This parent should configure the children to use the latest Java version with LTS support.
+        -->
+        <ieris.java.version>17</ieris.java.version>
+        <!--
+        ieris.encoding is a property used to quickly refer to the file encoding for the project.
+        -->
+        <ieris.encoding>UTF-8</ieris.encoding>
+
+        <!--
+        The following set of properties are used to configure the previous properties to have an effect.
+        -->
+        <maven.compiler.source>${ieris.java.version}</maven.compiler.source>
+        <maven.compiler.target>${ieris.java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>${ieris.encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${ieris.encoding}</project.reporting.outputEncoding>
+
+        <!-- Properties to override the default versions of the plugins -->
+        <ieris.versionDependency.plugin.maven-clean>3.2.0</ieris.versionDependency.plugin.maven-clean>
+        <ieris.versionDependency.plugin.maven-compiler>3.11.0</ieris.versionDependency.plugin.maven-compiler>
+        <ieris.versionDependency.plugin.maven-deploy>3.1.1</ieris.versionDependency.plugin.maven-deploy>
+        <ieris.versionDependency.plugin.maven-install>3.1.1</ieris.versionDependency.plugin.maven-install>
+        <ieris.versionDependency.plugin.maven-surefire>3.1.0</ieris.versionDependency.plugin.maven-surefire>
+        <ieris.versionDependency.plugin.maven-jar>3.3.0</ieris.versionDependency.plugin.maven-jar>
+        <ieris.versionDependency.plugin.maven-shade>3.4.1</ieris.versionDependency.plugin.maven-shade>
+        <ieris.versionDependency.plugin.maven-source>3.3.0</ieris.versionDependency.plugin.maven-source>
+        <ieris.versionDependency.plugin.maven-javadoc>3.5.0</ieris.versionDependency.plugin.maven-javadoc>
+
+        <!-- Properties to override the default settings of specific plugins -->
+        <!-- Sources -->
+        <ieris.pluginManagement.maven-source.phase>package</ieris.pluginManagement.maven-source.phase>
+        <ieris.pluginManagement.maven-source.goal>jar-no-fork</ieris.pluginManagement.maven-source.goal>
+        <!-- Javadoc -->
+        <ieris.pluginManagement.maven-javadoc.phase>package</ieris.pluginManagement.maven-javadoc.phase>
+        <ieris.pluginManagement.maven-javadoc.goal>jar</ieris.pluginManagement.maven-javadoc.goal>
+    </properties>
+
+    <build>
+        <!-- Updated Core plugins (general projects use) -->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <!--
+         Default Configuration (doesn't force children to use it):
+         For each plugin, the default configuration is set in the pluginManagement section.
+         Any child can then invoke the plugin without specifying the version or the configuration.
+         Or it can override the version or the configuration.
+
+         For plugin references, see: https://maven.apache.org/plugins/index.html
+         For plugin versions, see: https://mvnrepository.com/artifact/org.apache.maven.plugins
+        -->
+        <pluginManagement>
+            <plugins>
+                <!-- Core Plugins -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-clean}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-compiler}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-deploy}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-install}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-surefire}</version>
+                    <configuration>
+                        <includes>
+                            <include>**/Test*.java</include>
+                            <include>**/*Test.java</include>
+                            <include>**/*Tests.java</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+
+                <!-- Packaging Plugins -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-jar}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-shade}</version>
+                    <configuration>
+                        <createDependencyReducedPom>false</createDependencyReducedPom>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-source}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <phase>${ieris.pluginManagement.maven-source.phase}</phase>
+                            <goals>
+                                <goal>${ieris.pluginManagement.maven-source.goal}</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Documentation Plugins -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${ieris.versionDependency.plugin.maven-javadoc}</version>
+                    <executions>
+                        <execution>
+                            <id>attach-docs</id>
+                            <phase>${ieris.pluginManagement.maven-javadoc.phase}</phase>
+                            <goals>
+                                <goal>${ieris.pluginManagement.maven-javadoc.goal}</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
