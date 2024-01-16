@@ -6,7 +6,7 @@
 
     <groupId>com.ieris19.config</groupId>
     <artifactId>ieris-origin</artifactId>
-    <version>1.0.0</version>
+    <version>17.0.0</version>
     <packaging>pom</packaging>
     <name>Ieris Origin</name>
     <description>
