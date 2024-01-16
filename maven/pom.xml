@@ -35,8 +35,6 @@
         <!--
         The following set of properties are used to configure the previous properties to have an effect.
         -->
-        <maven.compiler.source>${ieris.java.version}</maven.compiler.source>
-        <maven.compiler.target>${ieris.java.version}</maven.compiler.target>
         <project.build.sourceEncoding>${ieris.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${ieris.encoding}</project.reporting.outputEncoding>
 
@@ -48,7 +46,7 @@
         <ieris.versionDependency.plugin.maven-surefire>3.1.0</ieris.versionDependency.plugin.maven-surefire>
         <ieris.versionDependency.plugin.maven-jar>3.3.0</ieris.versionDependency.plugin.maven-jar>
         <ieris.versionDependency.plugin.maven-shade>3.4.1</ieris.versionDependency.plugin.maven-shade>
-        <ieris.versionDependency.plugin.maven-source>3.3.0</ieris.versionDependency.plugin.maven-source>
+        <ieris.versionDependency.plugin.maven-source>3.3.1</ieris.versionDependency.plugin.maven-source>
         <ieris.versionDependency.plugin.maven-javadoc>3.5.0</ieris.versionDependency.plugin.maven-javadoc>
 
         <!-- Properties to override the default settings of specific plugins -->
@@ -107,6 +105,10 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${ieris.versionDependency.plugin.maven-compiler}</version>
+                    <configuration>
+                        <source>${ieris.java.version}</source>
+                        <target>${ieris.java.version}</target>
+                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -119,6 +121,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>${ieris.versionDependency.plugin.maven-install}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.3.1</version>
                 </plugin>
 
                 <plugin>
@@ -183,4 +191,11 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>ieris-origin</id>
+            <url>https://maven.pkg.github.com/ieris19/ieris-origin</url>
+        </repository>
+    </distributionManagement>
 </project>

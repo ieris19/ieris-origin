@@ -1,0 +1,74 @@
+### Jetbrains Configuration
+# User-specific stuff
+.idea/
+
+### VS Code Configs
+.vscode/
+
+### Miscelaneous Ignore
+# Logs
+logs/
+*.log
+*.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Compiled Output
+target/
+dist/
+out/
+build/
+
+### Web Development
+# Dependency directories
+node_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Sass
+.sass-cache/
+
+# Source maps
+*.*.map
+
+### Java Development
+# Compiled class file
+*.class
+*.jar
+
+# Maven Structure
+!.mvn/wrapper/maven-wrapper.jar
+
+
+### Backups & Archives
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+# Archive Formats
+*.7z
+*.jar
+*.ear
+*.war
+*.rar
+*.zip
+*.gz
+*.gzip
+*.bzip
+*.bzip2
+*.bz2
+*.xz
+*.lzma
+*.cab
+*.xar
